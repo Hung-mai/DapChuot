@@ -17,7 +17,7 @@ public class DapChuot_GameManager : MonoBehaviour
     // countdown game
     public Text countdown30sText;
     private bool countdown30s;
-    private float countdown30sTime = 31;
+    private float countdown30sTime = 33;
     public bool endGame;
 
     public GameObject endGamePanel;
@@ -55,9 +55,9 @@ public class DapChuot_GameManager : MonoBehaviour
 
                 for(int i = 0; i < 4; i++)
                 {
-                    bots[i].SetUpTurn();
+                    bots[i].StartGame();
                 }
-                DapChuot_Player.ins.SetUpTurn();
+                DapChuot_Player.ins.StartGame();
             }
             else
             {
