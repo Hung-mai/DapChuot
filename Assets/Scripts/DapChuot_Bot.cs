@@ -174,7 +174,7 @@ public class DapChuot_Bot : MonoBehaviour
 
         switch (id)
         {
-            case 0:
+            case 1:
                 thoiGianNhapNhay = (DapChuot_ReadFileLevel.ins.levelList.levels[turnIndex].bot1_end - DapChuot_ReadFileLevel.ins.levelList.levels[turnIndex].bot1_start) / 4.0f;
                 if(turnIndex + 1 == DapChuot_ReadFileLevel.ins.tableSize)
                 {
@@ -187,7 +187,7 @@ public class DapChuot_Bot : MonoBehaviour
                 
             break;
 
-            case 1:
+            case 2:
                 thoiGianNhapNhay = (DapChuot_ReadFileLevel.ins.levelList.levels[turnIndex].bot2_end - DapChuot_ReadFileLevel.ins.levelList.levels[turnIndex].bot2_start) / 4.0f;
                 if(turnIndex + 1 == DapChuot_ReadFileLevel.ins.tableSize)
                 {

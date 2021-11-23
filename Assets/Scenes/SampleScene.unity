@@ -2664,7 +2664,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7d65ac4cab4e464587cd2f6eb8f29de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
+  id: 5
   bongDen:
   - {fileID: 275776155}
   - {fileID: 1391723969}
@@ -2791,7 +2791,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7d65ac4cab4e464587cd2f6eb8f29de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
+  id: 1
   bongDen:
   - {fileID: 479273126}
   - {fileID: 929621373}
@@ -3387,7 +3387,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7d65ac4cab4e464587cd2f6eb8f29de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
+  id: 4
   bongDen:
   - {fileID: 1815374657}
   - {fileID: 759093274}
@@ -5578,7 +5578,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7d65ac4cab4e464587cd2f6eb8f29de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
+  id: 2
   bongDen:
   - {fileID: 1988492153}
   - {fileID: 489688283}
