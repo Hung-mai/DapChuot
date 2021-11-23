@@ -62,17 +62,24 @@ public class DapChuot_Bot : MonoBehaviour
                     timeWait = DapChuot_ReadFileLevel.ins.levelList.levels[i].bot5_start;
                 break;
             }
-            StartCoroutine(wait(timeWait));
+            if(i == 2 || i == 7 || i == 10 || i == 12)
+            {
+                StartCoroutine(wait(timeWait, true));
+            }
+            else
+            {
+                StartCoroutine(wait(timeWait, false));
+            }
         }
     }
 
-    IEnumerator wait(float ti)
+    IEnumerator wait(float ti, bool le)
     {
         yield return new WaitForSeconds(ti);
-        SetUpTurn();
+        SetUpTurn(le);
     }
 
-    private IEnumerator RunTurn()
+    private IEnumerator RunTurn(bool le)
     {
         for(int j = 0; j < 5; j++)
         {
@@ -97,21 +104,25 @@ public class DapChuot_Bot : MonoBehaviour
             else
             {
                 conChuot.transform.DOMove(new Vector3(chuotPos.x, 0.3f, chuotPos.z), 0.02f);
+                conChuot.material = defaultMouse;
+                conChuot.transform.GetChild(0).gameObject.SetActive(false);
                 bongDen[j - 1].material = defaultMaterial;
 
-                StartCoroutine(EndTurn());
+                if(le == false)
+                {
+                    StartCoroutine(EndTurn());
+                }
+                ranTime = Random.Range(0.1f, 0.5f);
+                yield return new WaitForSeconds(ranTime);
+                StartCoroutine(DapChuot());
             }
         }
     }
 
     IEnumerator EndTurn()
     {
-        // StartCoroutine(WaitToSetupTurn());
-
-        ranTime = Random.Range(0.1f, 0.5f);
-        yield return new WaitForSeconds(ranTime);
-        StartCoroutine(DapChuot());
-        yield return new WaitForSeconds(1f - ranTime);
+        
+        yield return new WaitForSeconds(1f);
         conChuot.transform.DOMove(chuotPos, 0.1f);
         conChuot.material = defaultMouse;
         conChuot.transform.GetChild(0).gameObject.SetActive(false);
@@ -122,7 +133,7 @@ public class DapChuot_Bot : MonoBehaviour
         yield return new WaitForSeconds(thoiGianCho);
         if(DapChuot_GameManager.ins.endGame == false)
         {
-            SetUpTurn();
+            // SetUpTurn();
         }
     }
 
@@ -157,8 +168,6 @@ public class DapChuot_Bot : MonoBehaviour
 
         botAnimator.Play("dapBua", -1, 0f);
         yield return new WaitForSeconds(0.1f);
-        
-        
 
         var sm = Instantiate(smokeEffect, new Vector3(chuotPos.x, 0.5f, chuotPos.z), Quaternion.identity);
         Destroy(sm, 1);
@@ -166,68 +175,30 @@ public class DapChuot_Bot : MonoBehaviour
         conChuot.transform.DOMove(new Vector3(chuotPos.x, -0.1f, chuotPos.z), 0.05f);
         conChuot.material = dizzyMouse;
         conChuot.transform.GetChild(0).gameObject.SetActive(true);
-
-        
     }
 
-    public void SetUpTurn()
+    public void SetUpTurn(bool le)
     {
-        // for(int i = 0; i < 4; i++)
-        // {
-        //     bongDen[i].material = defaultMaterial;
-        // }
 
         switch (id)
         {
             case 1:
                 thoiGianNhapNhay = (DapChuot_ReadFileLevel.ins.levelList.levels[turnIndex].bot1_end - DapChuot_ReadFileLevel.ins.levelList.levels[turnIndex].bot1_start) / 4.0f;
-                // if(turnIndex + 1 == DapChuot_ReadFileLevel.ins.tableSize)
-                // {
-                //     thoiGianCho = 2;
-                // }
-                // else
-                // {
-                //     thoiGianCho = DapChuot_ReadFileLevel.ins.levelList.levels[turnIndex + 1].bot1_start - DapChuot_ReadFileLevel.ins.levelList.levels[turnIndex].bot1_end;
-                // }
                 
             break;
 
             case 2:
                 thoiGianNhapNhay = (DapChuot_ReadFileLevel.ins.levelList.levels[turnIndex].bot2_end - DapChuot_ReadFileLevel.ins.levelList.levels[turnIndex].bot2_start) / 4.0f;
-                // if(turnIndex + 1 == DapChuot_ReadFileLevel.ins.tableSize)
-                // {
-                //     thoiGianCho = 2;
-                // }
-                // else
-                // {
-                //     thoiGianCho = DapChuot_ReadFileLevel.ins.levelList.levels[turnIndex + 1].bot2_start - DapChuot_ReadFileLevel.ins.levelList.levels[turnIndex].bot2_end;
-                // }
-                
+
             break;
 
             case 4:
                 thoiGianNhapNhay = (DapChuot_ReadFileLevel.ins.levelList.levels[turnIndex].bot4_end - DapChuot_ReadFileLevel.ins.levelList.levels[turnIndex].bot4_start) / 4.0f;
-                // if(turnIndex + 1 == DapChuot_ReadFileLevel.ins.tableSize)
-                // {
-                //     thoiGianCho = 2;
-                // }
-                // else
-                // {
-                //     thoiGianCho = DapChuot_ReadFileLevel.ins.levelList.levels[turnIndex + 1].bot4_start - DapChuot_ReadFileLevel.ins.levelList.levels[turnIndex].bot4_end;
-                // }
                 
             break;
 
             case 5:
                 thoiGianNhapNhay = (DapChuot_ReadFileLevel.ins.levelList.levels[turnIndex].bot5_end - DapChuot_ReadFileLevel.ins.levelList.levels[turnIndex].bot5_start) / 4.0f;
-                // if(turnIndex + 1 == DapChuot_ReadFileLevel.ins.tableSize)
-                // {
-                //     thoiGianCho = 2;
-                // }
-                // else
-                // {
-                //     thoiGianCho = DapChuot_ReadFileLevel.ins.levelList.levels[turnIndex + 1].bot5_start - DapChuot_ReadFileLevel.ins.levelList.levels[turnIndex].bot5_end;
-                // }
                 
             break;
             
@@ -238,9 +209,7 @@ public class DapChuot_Bot : MonoBehaviour
 
         turnIndex ++;
         
-        // thoiGianDemNguoc = 10;
-        
-        StartCoroutine(RunTurn());
+        StartCoroutine(RunTurn(le));
     }
 
 }
